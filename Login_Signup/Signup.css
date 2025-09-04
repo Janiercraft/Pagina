@@ -1,0 +1,134 @@
+.forma{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+    background-color: #1a1a1a;
+    color: #fff;
+    border: 1px solid #333;
+}
+
+.titulo{
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    color: #00bfff;
+}
+
+.titulo::before{
+    width: 18px;
+    height: 18px;
+}
+
+.titulo::after{
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+}
+
+.titulo::before, .titulo::after{
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: #00bfff;
+}
+
+.mensaje, .access{
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.access{
+    text-align: center;
+}
+
+.access a:hover{
+    text-decoration: underline;
+
+}
+
+.access a{
+    color: #00bfff;
+}
+
+.flexo{
+    display: flex;
+    width: 100%;
+    gap: 6px;
+}
+
+.forma label{
+    position: relative;
+}
+
+.forma label .campo{
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    padding: 20px 5px 5px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+}
+
+.forma label .campo + span{
+    color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+}
+
+.forma label .campo:placeholder-shown + span{
+    top: 12.5px;
+    font-size: 0.9em;
+}
+
+.forma label .campo:focus + span,
+.forma label .campo:valid + span{
+    color: #00bfff;
+    top: 0px;
+    font-size: 0.7em;
+    font-weight: 600;
+}
+
+.campo{
+    font-size: medium;
+}
+
+.boton{
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+    background-color: #00bfff;
+}
+
+.boton:hover{
+    background-color: #96bfff96;
+}
+
+@keyframes pulse{
+    front{
+        transform: scale(0.9);
+        opacity: 1;
+    }
+    to{
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}

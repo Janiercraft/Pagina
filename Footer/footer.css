@@ -1,0 +1,44 @@
+.contenedor{
+    padding: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+}
+.page{
+    width: 20%;
+    border: 1px solid ;
+    padding: 5px;
+    margin: 10px;
+}
+.shortcut{
+    width: 20%;
+    border: 1px solid ;
+    padding: 5px;
+    margin: 10px;
+}
+.redes{
+    width: 20%;
+    border: 1px solid ;
+    padding: 5px;
+    margin: 10px;
+}
+.principal{
+    background: cyan;
+}
+h1{
+    text-align: center;
+}
+a{
+    text-decoration: none;
+}
+.derechos{
+    background: gray;
+    width: 100%;
+    border: 1px solid ;
+    padding: 5px;
+    bottom: 0;
+}
+.derechos h3{
+    text-align: center;
+}
