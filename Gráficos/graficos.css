@@ -1,0 +1,345 @@
+/* ========================================
+   RESET Y CONFIGURACIÓN BASE
+   ======================================== */
+
+/* Reset básico para eliminar márgenes y espacios por defecto */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+}
+
+/* Estilos del body - configuración general de la página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna y legible */
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); /* Fondo con gradiente sutil */
+    color: #343a40; /* Color de texto gris oscuro */
+    line-height: 1.6; /* Espaciado entre líneas para mejor legibilidad */
+}
+
+/* ========================================
+   LAYOUT PRINCIPAL
+   ======================================== */
+
+/* Contenedor principal que centraliza el contenido */
+.container {
+    max-width: 1400px; /* Ancho máximo para mantener legibilidad */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 2rem; /* Espaciado interno */
+}
+
+/* ========================================
+   HEADER Y TÍTULO PRINCIPAL
+   ======================================== */
+
+/* Sección del encabezado */
+.header {
+    text-align: center; /* Centra el texto */
+    margin-bottom: 3rem; /* Espacio inferior */
+    position: relative; /* Para posicionar elementos internos */
+}
+
+/* Título principal */
+.header h1 {
+    font-size: 3rem; /* Tamaño grande para impacto visual */
+    font-weight: 700; /* Peso bold */
+    color: #2563eb; /* Azul sólido de la marca */
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block; /* Para que el pseudo-elemento se posicione correctamente */
+}
+
+/* Línea decorativa debajo del título principal */
+.header h1::after {
+    content: ''; /* Elemento vacío */
+    position: absolute;
+    bottom: -10px; /* Posición debajo del texto */
+    left: 50%;
+    transform: translateX(-50%); /* Centra la línea */
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb, #3b82f6); /* Gradiente azul */
+    border-radius: 2px; /* Bordes redondeados */
+}
+
+/* Subtítulo descriptivo */
+.header p {
+    font-size: 1.2rem;
+    color: #6c757d; /* Gris medio */
+    font-weight: 300; /* Peso ligero */
+}
+
+/* ========================================
+   DASHBOARD DE GRÁFICOS
+   ======================================== */
+
+/* Grid responsivo para las tarjetas de gráficos */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Columnas flexibles */
+    gap: 2rem; /* Espacio entre elementos */
+    margin-bottom: 3rem;
+}
+
+/* Tarjetas individuales para cada gráfico */
+.chart-card {
+    background: white; /* Fondo blanco limpio */
+    border-radius: 20px; /* Bordes muy redondeados para look moderno */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra sutil */
+    padding: 2rem; /* Espaciado interno generoso */
+    position: relative;
+    overflow: hidden; /* Oculta elementos que salen del contenedor */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave personalizada */
+    border: 1px solid rgba(37, 99, 235, 0.1); /* Borde azul muy sutil */
+}
+
+/* Efecto hover para las tarjetas de gráficos */
+.chart-card:hover {
+    transform: translateY(-8px); /* Eleva la tarjeta */
+    box-shadow: 0 20px 50px rgba(37, 99, 235, 0.2); /* Sombra más intensa */
+}
+
+/* Barra decorativa superior en las tarjetas */
+.chart-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb, #3b82f6, #60a5fa); /* Gradiente azul */
+    border-radius: 20px 20px 0 0; /* Solo bordes superiores redondeados */
+}
+
+/* Títulos de los gráficos */
+.chart-title {
+    font-size: 1.5rem;
+    font-weight: 600; /* Semi-bold */
+    color: #343a40; /* Gris oscuro */
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+/* Contenedor para los canvas de los gráficos */
+.chart-container {
+    position: relative;
+    height: 350px; /* Altura fija para consistencia */
+    margin-bottom: 1rem;
+}
+
+/* ========================================
+   SECCIÓN DE DATOS E INDICADORES
+   ======================================== */
+
+/* Sección principal de datos */
+.data-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+/* Barra decorativa para la sección de datos */
+.data-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb, #3b82f6, #60a5fa);
+    border-radius: 20px 20px 0 0;
+}
+
+/* Grid responsivo para los indicadores de datos */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Columnas adaptables */
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Elementos individuales de datos/KPIs */
+.data-item {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); /* Gradiente sutil */
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    position: relative;
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover para elementos de datos */
+.data-item:hover {
+    transform: translateY(-3px); /* Elevación menor que las tarjetas principales */
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+}
+
+/* Valores numéricos principales en los KPIs */
+.data-value {
+    font-size: 2.5rem; /* Tamaño grande para destacar */
+    font-weight: 700; /* Bold */
+    color: #2563eb; /* Azul de marca */
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Etiquetas descriptivas de los KPIs */
+.data-label {
+    font-size: 1rem;
+    color: #6c757d; /* Gris medio */
+    font-weight: 500; /* Peso medio */
+    text-transform: uppercase; /* Todo en mayúsculas */
+    letter-spacing: 0.5px; /* Espaciado entre letras */
+}
+
+/* ========================================
+   INDICADORES DE TENDENCIA
+   ======================================== */
+
+/* Estilo base para indicadores de tendencia */
+.trend {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+/* Tendencia positiva (verde) */
+.trend.up {
+    color: #10b981; /* Verde éxito */
+}
+
+/* Tendencia negativa (rojo) */
+.trend.down {
+    color: #ef4444; /* Rojo alerta */
+}
+
+/* ========================================
+   TARJETAS DE RESUMEN ESTADÍSTICO
+   ======================================== */
+
+/* Grid para las tarjetas de resumen */
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Tarjetas de resumen con fondo azul */
+.summary-card {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); /* Gradiente azul */
+    color: white; /* Texto blanco */
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover para tarjetas de resumen */
+.summary-card:hover {
+    transform: scale(1.02); /* Escalado ligero */
+    box-shadow: 0 15px 40px rgba(37, 99, 235, 0.3); /* Sombra azul */
+}
+
+/* Efecto de brillo en las tarjetas de resumen */
+.summary-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    opacity: 0;
+}
+
+/* Activación del efecto de brillo en hover */
+.summary-card:hover::before {
+    animation: shine 0.6s ease;
+}
+
+/* Animación del efecto de brillo */
+@keyframes shine {
+    0% { transform: rotate(45deg) translateX(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: rotate(45deg) translateX(100%); opacity: 0; }
+}
+
+/* Títulos en tarjetas de resumen */
+.summary-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    opacity: 0.9; /* Ligeramente transparente */
+}
+
+/* Valores principales en tarjetas de resumen */
+.summary-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+/* Descripción de cambios en tarjetas de resumen */
+.summary-change {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MÓVILES
+   ======================================== */
+
+/* Media query para pantallas pequeñas (tablets y móviles) */
+@media (max-width: 768px) {
+    /* Reduce el padding en dispositivos móviles */
+    .container {
+        padding: 1rem;
+    }
+    
+    /* Reduce el tamaño del título en móviles */
+    .header h1 {
+        font-size: 2.2rem;
+    }
+    
+    /* Fuerza una sola columna en el dashboard */
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Reduce la altura de los gráficos en móviles */
+    .chart-container {
+        height: 300px;
+    }
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+
+/* Clase para elementos que aparecen con fadeIn */
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Definición de la animación fadeIn */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Comienza invisible */
+        transform: translateY(30px); /* Comienza desplazado hacia abajo */
+    }
+    to {
+        opacity: 1; /* Termina visible */
+        transform: translateY(0); /* Termina en posición normal */
+    }
+}
