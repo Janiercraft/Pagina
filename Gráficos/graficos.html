@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Configuración básica del documento -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gráficos - Importación y Exportación</title>
-
-    <!-- Librería Chart.js para crear gráficos interactivos -->
+    <title>Gráficos - Exoires S.A.S</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-
-    <!-- Enlace al archivo CSS externo -->
     <link rel="stylesheet" href="graficos.css">
 </head>
 <body>
-    <!-- Contenedor principal que centraliza todo el contenido -->
+    
     <div class="container">
         
-        <!-- ========================================
-             SECCIÓN DE ENCABEZADO
-             ======================================== -->
         <div class="header fade-in">
             <!-- Título principal de la página -->
             <h1>Dashboard de Comercio Internacional</h1>
@@ -26,84 +19,65 @@
             <p>Análisis detallado de importaciones y exportaciones</p>
         </div>
 
-        <!-- ========================================
-             DASHBOARD PRINCIPAL CON GRÁFICOS
-             ======================================== -->
         <div class="dashboard">
             
-            <!-- Tarjeta del gráfico de barras -->
             <div class="chart-card fade-in">
-                <!-- Título del gráfico -->
                 <h3 class="chart-title">Volumen de Comercio por Trimestre</h3>
-                <!-- Contenedor que mantiene el tamaño del gráfico -->
                 <div class="chart-container">
-                    <!-- Canvas donde se renderiza el gráfico de barras -->
                     <canvas id="barChart"></canvas>
                 </div>
             </div>
 
-            <!-- Tarjeta del gráfico de torta/dona -->
+            
             <div class="chart-card fade-in">
-                <!-- Título del gráfico -->
                 <h3 class="chart-title">Distribución por Categorías de Productos</h3>
-                <!-- Contenedor que mantiene el tamaño del gráfico -->
                 <div class="chart-container">
-                    <!-- Canvas donde se renderiza el gráfico de dona -->
                     <canvas id="pieChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- ========================================
-             SECCIÓN DE DATOS E INDICADORES KPI
-             ======================================== -->
+       
         <div class="data-section fade-in">
-            <!-- Título de la sección de datos -->
             <h3 class="chart-title">Indicadores Clave de Rendimiento</h3>
-            
-            <!-- Grid responsivo para los KPIs -->
             <div class="data-grid">
                 
-                <!-- KPI 1: Exportaciones Totales -->
+                
                 <div class="data-item">
-                    <!-- Valor principal del KPI -->
+                    
                     <span class="data-value">$2.4M</span>
-                    <!-- Etiqueta descriptiva -->
+                   
                     <div class="data-label">Exportaciones Totales</div>
-                    <!-- Indicador de tendencia positiva -->
+                   
                     <div class="trend up">↑ +15.2%</div>
                 </div>
                 
-                <!-- KPI 2: Importaciones Totales -->
+              
                 <div class="data-item">
                     <span class="data-value">$1.8M</span>
                     <div class="data-label">Importaciones Totales</div>
                     <div class="trend up">↑ +8.7%</div>
                 </div>
-                
-                <!-- KPI 3: Balance Comercial -->
+               
                 <div class="data-item">
                     <span class="data-value">$600K</span>
                     <div class="data-label">Balance Comercial</div>
                     <div class="trend up">↑ +23.5%</div>
                 </div>
                 
-                <!-- KPI 4: Países Activos -->
                 <div class="data-item">
                     <span class="data-value">47</span>
                     <div class="data-label">Países Activos</div>
                     <div class="trend up">↑ +12.8%</div>
                 </div>
                 
-                <!-- KPI 5: Número de Operaciones -->
                 <div class="data-item">
                     <span class="data-value">156</span>
                     <div class="data-label">Operaciones</div>
-                    <!-- Ejemplo de tendencia negativa -->
+                   
                     <div class="trend down">↓ -3.2%</div>
                 </div>
                 
-                <!-- KPI 6: Tasa de Éxito -->
                 <div class="data-item">
                     <span class="data-value">92.5%</span>
                     <div class="data-label">Tasa de Éxito</div>
@@ -112,12 +86,9 @@
             </div>
         </div>
 
-        <!-- ========================================
-             TARJETAS DE RESUMEN ESTADÍSTICO
-             ======================================== -->
+       
         <div class="stats-summary">
             
-            <!-- Tarjeta de crecimiento anual -->
             <div class="summary-card fade-in">
                 <!-- Título de la métrica -->
                 <div class="summary-title">Crecimiento Anual</div>
@@ -127,14 +98,11 @@
                 <div class="summary-change">Mejor desempeño en 3 años</div>
             </div>
             
-            <!-- Tarjeta de nuevos mercados -->
             <div class="summary-card fade-in">
                 <div class="summary-title">Nuevos Mercados</div>
                 <div class="summary-value">12</div>
                 <div class="summary-change">Expansión internacional</div>
             </div>
-            
-            <!-- Tarjeta de eficiencia operativa -->
             <div class="summary-card fade-in">
                 <div class="summary-title">Eficiencia Operativa</div>
                 <div class="summary-value">95.2%</div>
@@ -143,10 +111,7 @@
         </div>
     </div>
 
-    <!-- ========================================
-         SCRIPTS DE JAVASCRIPT
-         ======================================== -->
-    <!-- Enlace al archivo JavaScript externo -->
     <script src="graficos.js"></script>
 </body>
+
 </html>
