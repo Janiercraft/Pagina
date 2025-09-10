@@ -1,65 +1,56 @@
-/* ========================================
-   RESET Y CONFIGURACIÓN BASE
-   ======================================== */
-
-/* Reset básico para eliminar márgenes y espacios por defecto */
-* {
+{
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+    box-sizing: border-box; 
 }
 
-/* Estilos del body - configuración general de la página */
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna y legible */
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); /* Fondo con gradiente sutil */
-    color: #343a40; /* Color de texto gris oscuro */
-    line-height: 1.6; /* Espaciado entre líneas para mejor legibilidad */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+    color: #343a40; 
+    line-height: 1.6; 
 }
 
-/* ========================================
-   LAYOUT PRINCIPAL
-   ======================================== */
 
-/* Contenedor principal que centraliza el contenido */
+
+
 .container {
-    max-width: 1400px; /* Ancho máximo para mantener legibilidad */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-    padding: 2rem; /* Espaciado interno */
+    max-width: 1400px; 
+    margin: 0 auto;
+    padding: 2rem; 
 }
 
-/* ========================================
-   HEADER Y TÍTULO PRINCIPAL
-   ======================================== */
 
-/* Sección del encabezado */
+
+
 .header {
-    text-align: center; /* Centra el texto */
-    margin-bottom: 3rem; /* Espacio inferior */
-    position: relative; /* Para posicionar elementos internos */
+    text-align: center; 
+    margin-bottom: 3rem; 
+    position: relative; 
 }
 
-/* Título principal */
+
 .header h1 {
-    font-size: 3rem; /* Tamaño grande para impacto visual */
-    font-weight: 700; /* Peso bold */
-    color: #2563eb; /* Azul sólido de la marca */
+    font-size: 3rem; 
+    font-weight: 700; 
+    color: #2563eb; 
     margin-bottom: 1rem;
     position: relative;
-    display: inline-block; /* Para que el pseudo-elemento se posicione correctamente */
+    display: inline-block; 
 }
 
-/* Línea decorativa debajo del título principal */
+
 .header h1::after {
-    content: ''; /* Elemento vacío */
+    content: ''; 
     position: absolute;
-    bottom: -10px; /* Posición debajo del texto */
+    bottom: -10px; 
     left: 50%;
-    transform: translateX(-50%); /* Centra la línea */
+    transform: translateX(-50%); 
     width: 100px;
     height: 4px;
-    background: linear-gradient(90deg, #2563eb, #3b82f6); /* Gradiente azul */
-    border-radius: 2px; /* Bordes redondeados */
+    background: linear-gradient(90deg, #2563eb, #3b82f6); 
+    border-radius: 2px; 
 }
 
 /* Subtítulo descriptivo */
@@ -342,4 +333,5 @@ body {
         opacity: 1; /* Termina visible */
         transform: translateY(0); /* Termina en posición normal */
     }
+
 }
