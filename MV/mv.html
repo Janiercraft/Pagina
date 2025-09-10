@@ -1,22 +1,81 @@
-<div class="MVV">
-    <div class="Mision">
-        <h1>Mision</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil maxime tempore voluptatum eum et fugit
-            quam! Similique animi nostrum iusto veritatis ab, voluptatibus magni minima error quos eaque mollitia
-            ullam?</p>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mision_vision</title>
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="nav/navbar.css">
+    <link rel="stylesheet" href="mv.css">
 
-    <div class="Vision">
-        <h1>Vision</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat iure natus quidem rerum dolore
-            asperiores, nisi voluptatum accusamus impedit sint iusto eveniet deleniti placeat obcaecati dolorum
-            beatae, labore corporis! Blanditiis!</p>
-    </div>
+</head>
+<body>
+<video autoplay muted loop id="bgVideo">
+    <source src="buque.mp4.mp4" type="video/mp4">
+</video>
+    <section class="MVV">
+        <div class="Mision">
+               <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Buque" style="width:100px; border-radius:50%; box-shadow:0 4px 16px rgba(104,172,223,0.3); margin-bottom:10px;">
+            <h2 style="font-size:2rem; font-family:'Georgia',serif; color:#68ACDF; text-shadow:2px 2px 8px #fff, 0 0 10px #68ACDF;">Misión</h2>
+            <p>
+                Brindar soluciones integrales en logística y comercio exterior, facilitando el transporte seguro y eficiente de mercancías a nivel global.
+            </p>
+        </div>
 
-    <div class="VC">
-        <h1>Valores corporativos</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat iure natus quidem rerum dolore
-            asperiores, nisi voluptatum accusamus impedit sint iusto eveniet deleniti placeat obcaecati dolorum
-            beatae, labore corporis! Blanditiis!</p>
-    </div>
-</div>
+        <div class="Vision">
+            <img src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&w=400&q=80" alt="Contenedor" style="width:100px; border-radius:50%; box-shadow:0 4px 16px rgba(243,29,29,0.2); margin-bottom:10px;">
+            <h2 style="font-size:2rem; font-family:'Georgia',serif; color:#68ACDF; text-shadow:2px 2px 8px #fff, 0 0 10px #68ACDF;">Visión</h2>
+            <p>
+                Ser líderes en el sector logístico, innovando constantemente y superando las expectativas de nuestros clientes en cada envío.
+            </p>
+        </div>
+        
+        <div class="VC">
+            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Valores" style="width:100px; border-radius:50%; box-shadow:0 4px 16px rgba(19, 17, 17, 0.2); margin-bottom:10px;">
+            <h2 style="font-size:2rem; font-family:'Georgia',serif; color:#68ACDF; text-shadow:2px 2px 8px #fff, 0 0 10px #68ACDF;">Valores Corporativos</h2>
+
+              <ul class="valores">
+                  <li><span>•</span> Actuamos con honestidad y transparencia en todas nuestras operaciones.</li>
+                  <li><span>•</span> Nos dedicamos a cumplir con las expectativas de nuestros clientes y socios.</li>
+                  <li><span>•</span> Buscamos constantemente nuevas formas de mejorar nuestros servicios y procesos.</li>
+                  <li><span>•</span> Promovemos prácticas responsables que minimicen nuestro impacto ambiental.</li>
+                  <li><span>•</span> Fomentamos la colaboración y el respeto entre nuestros empleados y socios.</li>
+                  <li><span>•</span> Nos comprometemos a la excelencia en todo lo que hacemos.</li>
+              </ul>
+
+        </div>
+    </section>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("./Nav/navbar.html")
+            .then(response => {
+            if (!response.ok) throw new Error("No se puede cargar navbar: " + response.status);
+            return response.text();
+            })
+            .then(data => {
+            document.getElementById("navbar").innerHTML = data;
+            })
+            .catch(err => {
+            console.error(err);
+            document.getElementById("navbar").innerHTML = "<p>No se pudo cargar la barra.</p>";
+            });
+        });
+    </script>
+</body>
+</html>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
