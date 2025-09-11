@@ -1,39 +1,54 @@
 <!doctype html>
 <html lang="es">
+
 <head>
+  <div id="contenedor-navegacion"></div>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Carrusel — efecto estilo ejemplo</title>
   <link rel="stylesheet" href="AboutUs.css">
 </head>
+
 <body>
   <div id="slider" class="slider" style="--width:320px; --height:260px; --duration:18s;">
     <div class="list">
       <div class="item" data-pos="1">
         <div class="card">
           <img src="https://picsum.photos/id/1015/600/400" alt="1">
-          <div class="info"><h3>Montaña</h3><p>Texto de ejemplo 1.</p></div>
+          <div class="info">
+            <h3>Montaña</h3>
+            <p>Texto de ejemplo 1.</p>
+          </div>
         </div>
       </div>
 
       <div class="item" data-pos="2">
         <div class="card">
           <img src="https://picsum.photos/id/1025/600/400" alt="2">
-          <div class="info"><h3>Caballo</h3><p>Texto de ejemplo 2.</p></div>
+          <div class="info">
+            <h3>Caballo</h3>
+            <p>Texto de ejemplo 2.</p>
+          </div>
         </div>
       </div>
 
       <div class="item" data-pos="3">
         <div class="card">
           <img src="https://picsum.photos/id/1021/600/400" alt="3">
-          <div class="info"><h3>Ciudad</h3><p>Texto de ejemplo 3.</p></div>
+          <div class="info">
+            <h3>Ciudad</h3>
+            <p>Texto de ejemplo 3.</p>
+          </div>
         </div>
       </div>
 
       <div class="item" data-pos="4">
         <div class="card">
           <img src="https://picsum.photos/id/1003/600/400" alt="4">
-          <div class="info"><h3>Playa</h3><p>Texto de ejemplo 4.</p></div>
+          <div class="info">
+            <h3>Playa</h3>
+            <p>Texto de ejemplo 4.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -42,7 +57,9 @@
   <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
     <div id="modalContent" class="modal-content"></div>
   </div>
-
+  <div id="contenedor-pie"></div>
+  <script src="/respaldo.js"></script>
   <script src="AboutUs.js"></script>
 </body>
+
 </html>
