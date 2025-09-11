@@ -1,0 +1,73 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.Barra_nav {
+  background-color: rgba(104,172,223,0.98);
+  width: 100%;
+  /* usar una altura fija o auto + padding */
+  height: auto;
+  padding: 0.5rem 1rem; /* control de espacio vertical */
+}
+
+/* Contenedor principal de la barra */
+.navbar {
+  max-width: 1200px; /* opcional: limita anchura */
+  margin: 0 auto;
+  display: flex;
+  align-items: center; /* centra verticalmente logo y botones */
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Logo: usar max-height para evitar escalados raros */
+.Logo {
+  height: 48px;     /* tamaño fijo razonable */
+  width: auto;
+  max-height: 56px; /* seguridad */
+}
+
+/* Espaciado entre secciones */
+.space {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Bloques izquierdo y derecho */
+.izquierda, .derecha {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* Links */
+a {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: aliceblue;
+}
+
+/* Botones: no usar altura en % */
+button {
+  background: transparent;
+  border: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Hover */
+button:hover {
+  transition: all 0.15s ease;
+  background: rgba(126,129,210,0.12);
+}
+
+/* Responsivo básico */
+@media (max-width: 700px) {
+  .Logo { height: 40px; }
+  .izquierda { gap: 0.8rem; }
+  .derecha { gap: 0.8rem; }
+  .navbar { padding: 0.25rem; }
+}

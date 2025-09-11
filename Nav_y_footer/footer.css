@@ -199,3 +199,8 @@ color: #fcfcfc;
   background: #e4405f;
   color: #fff;
 }
+
+.aguapanela{
+  display: flex;
+  justify-content: center;
+}
