@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto- Exoire S.A.S</title>
+    <link rel="stylesheet" href="presupuesto.css">
+   
+</head>
+<body>
+<div class="Contenedor_presupuesto"></div>
+    <h1>Presupuesto</h1>
+    <h3>Calcula el costo estimado de tu envío</h3>
+    <p>Completa el formulario a continuación para obtener una cotización aproximada para el envío de tu producto.</p>
+    <div class="Contenedor_transporte">
+</div>
+       <form id="Buscador"></form>
+           <div class="formulario">
+               <div class="transporte">
+                   <label for="nombre">Modalidad de transporte:</label>
+                   <select id="modalidad" name="modalidad" required>
+                       <option value="">Seleccione una modalidad</option>
+                       <option value="terrestre">Terrestre</option>
+                       <option value="aereo">Aéreo</option>
+                       <option value="maritimo">Marítimo</option>
+                   </select>
+
+                   <div class="Producto">
+                     <label for="nombre">Producto a transportar:</label>
+                    <input type="text" id="producto" name="producto" required placeholder="Producto a transportar">
+                   </div>
+
+                <div class="transporte-detalles">
+                    <label for="peso">Peso:</label>
+                    <input type="number" id="peso" name="peso" required>
+
+                    <label for="dimensiones">Dimensiones:</label>
+                    <select id="dimensiones" name="dimensiones" required>
+                        <option value="">Seleccione una unidad</option>
+                        <option value="Kilogramos">Kg</option>
+                        <option value="Toneladas">Toneladas</option>
+
+                    </select>
+
+                <div class="Contenedor_Ruta"></div>
+                <h3>Ruta de envío</h3>
+                    <div class="ruta">
+                        <label for="origen">Ciudad de origen:</label>
+                        <input type="text" id="origen" name="origen" required placeholder="Ciudad de origen">
+
+                        <label for="destino">Ciudad de destino:</label>
+                        <input type="text" id="destino" name="destino" required placeholder="Ciudad de destino">
+                    </div>
+
+                <label for="Precio"></label>
+                <div class="precio">
+                    <button type="submit">Calcular Presupuesto</button>
+                    <div id="resultado"></div>
+
+
+                </div>
+               </div>
+           </div>
+       </form>
+   </div>
+</div>
+
+</body>
+</html>
