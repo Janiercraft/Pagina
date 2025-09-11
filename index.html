@@ -6,22 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exoire S.A.S</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="/Pagina/Recursos/footer.css">
-    <link rel="stylesheet" href="/Pagina/Recursos/navbar.css">
-    <link rel="stylesheet" href="mv.css">
 </head>
 
 <body>
-    <div class="About">
-        <h1>Exporta e Importa con nosotros</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat harum excepturi molestiae corporis ratione
-            quisquam quae ad deleniti velit unde, quam sed rem tenetur exercitationem ducimus, recusandae pariatur
-            voluptatum iure.</p>
-    </div>
-    </div>
-
     <video autoplay muted loop id="bgVideo">
-        <source src="buque.mp4" type="video/mp4">
+        <source src="/MV/buque.mp4.mp4" type="video/mp4">
     </video>
         <section class="MVV">
             <div class="Mision">
@@ -55,27 +44,7 @@
 
             </div>
         </section>
-    </main>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch("./Nav/navbar.html")
-                .then(response => {
-                if (!response.ok) throw new Error("No se puede cargar navbar: " + response.status);
-                return response.text();
-                })
-                .then(data => {
-                document.getElementById("navbar").innerHTML = data;
-                })
-                .catch(err => {
-                console.error(err);
-                document.getElementById("navbar").innerHTML = "<p>No se pudo cargar la barra.</p>";
-                });
-            });
-        </script>
-    </body>
-    </html>
-  
-    
+    </main>    
 </body>
 
 </html>
