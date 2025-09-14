@@ -1,27 +1,68 @@
+// respaldo.js (versión aún más tolerante y con logging detallado)
+async function tryFetchVariants(ruta) {
+  const variants = [ruta, './' + ruta, '/' + ruta];
+  for (const v of variants) {
+    try {
+      const resp = await fetch(v, { cache: 'no-store' });
+      if (resp && resp.ok) {
+        console.debug(`[respaldo] fetch OK -> ${v}`);
+        return { response: resp, usedPath: v };
+      } else {
+        console.debug(`[respaldo] fetch fallo (status ${resp ? resp.status : 'no resp'}) -> ${v}`);
+      }
+    } catch (err) {
+      console.debug(`[respaldo] fetch error -> ${v}`, err);
+    }
+  }
+  return { response: null, usedPath: null };
+}
+
+function looksDangerousScriptText(text) {
+  if (!text) return false;
+  const patterns = [
+    /\bwindow\.location\b/i,
+    /\blocation\.href\b/i,
+    /\blocation\.replace\b/i,
+    /\blocation\.assign\b/i,
+    /\bdocument\.location\b/i,
+    /\btop\.location\b/i,
+    /\bparent\.location\b/i,
+  ];
+  return patterns.some(rx => rx.test(text));
+}
+
 async function cargarComponente(contenedorId, rutaArchivo) {
+  const contenedor = document.getElementById(contenedorId);
+  if (!contenedor) {
+    console.warn(`[respaldo] contenedor no encontrado: ${contenedorId}`);
+    return;
+  }
+
   try {
-    const respuesta = await fetch(rutaArchivo);
-    if (!respuesta.ok) {
-      throw new Error(`Error al cargar ${rutaArchivo}: ${respuesta.status}`);
+    // intentar fetch con variantes
+    const { response, usedPath } = await tryFetchVariants(rutaArchivo);
+    if (!response) {
+      throw new Error(`No se encontró el archivo en variantes: ${rutaArchivo}`);
     }
 
-    const html = await respuesta.text();
-    const contenedor = document.getElementById(contenedorId);
-    if (!contenedor) return;
-
+    const html = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
+    const baseUrl = response.url || usedPath || location.href;
 
+    console.debug(`[respaldo] parsed HTML desde: ${baseUrl}`);
+
+    // quitar potenciales tags peligrosos de head
     doc.querySelectorAll('title, base').forEach(n => n.remove());
     doc.querySelectorAll('meta[http-equiv]').forEach(n => {
       const eq = (n.getAttribute('http-equiv') || '').toLowerCase();
       if (eq === 'refresh') n.remove();
     });
 
-    const baseUrl = respuesta.url;
+    // resolver src/href/poster relativos -> URLs absolutas respecto al archivo cargado
     (function resolveRelativeAttrs() {
-      const attrsToFix = ['src', 'href', 'poster'];
-      for (const attr of attrsToFix) {
+      const attrs = ['src', 'href', 'poster'];
+      for (const attr of attrs) {
         const els = Array.from(doc.querySelectorAll('[' + attr + ']'));
         for (const el of els) {
           const val = el.getAttribute(attr);
@@ -31,19 +72,19 @@ async function cargarComponente(contenedorId, rutaArchivo) {
             const resolved = new URL(val, baseUrl).href;
             el.setAttribute(attr, resolved);
           } catch (e) {
-            console.warn('No se pudo resolver URL para', val, 'desde', baseUrl);
+            console.warn('[respaldo] no se pudo resolver', val, 'desde', baseUrl);
           }
         }
       }
     })();
 
+    // mover hojas de estilo al head y esperar a que carguen
     function isStylesheetLoaded(href) {
       return Array.from(document.styleSheets).some(s => s.href === href);
     }
 
     const links = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'));
-    const loadPromises = [];
-
+    const cssLoadPromises = [];
     for (const link of links) {
       const href = link.getAttribute('href') || '';
       try {
@@ -54,12 +95,15 @@ async function cargarComponente(contenedorId, rutaArchivo) {
           existing.rel = 'stylesheet';
           existing.href = hrefResolved;
           document.head.appendChild(existing);
+          console.debug('[respaldo] appended stylesheet:', hrefResolved);
+        } else {
+          console.debug('[respaldo] stylesheet ya presente:', hrefResolved);
         }
 
         if (isStylesheetLoaded(hrefResolved)) {
-          loadPromises.push(Promise.resolve());
+          cssLoadPromises.push(Promise.resolve());
         } else {
-          loadPromises.push(new Promise((resolve) => {
+          cssLoadPromises.push(new Promise((resolve) => {
             const onFinish = () => {
               existing.removeEventListener('load', onFinish);
               existing.removeEventListener('error', onFinish);
@@ -67,122 +111,132 @@ async function cargarComponente(contenedorId, rutaArchivo) {
             };
             existing.addEventListener('load', onFinish);
             existing.addEventListener('error', onFinish);
-            setTimeout(onFinish, 2000);
+            // timeout de seguridad
+            setTimeout(onFinish, 2500);
           }));
         }
       } catch (e) {
-        console.warn('Error resolviendo href de stylesheet:', href, e);
+        console.warn('[respaldo] error resolviendo stylesheet href:', href, e);
       }
       link.remove();
     }
 
+    // extraer scripts (pero no descartamos inline a menos que sean peligrosos)
     const scripts = Array.from(doc.querySelectorAll('script'));
-    const safeExternalScripts = [];
-
-    const redirectPatterns = [
-      /\bwindow\.location\b/i,
-      /\blocation\.href\b/i,
-      /\blocation\.replace\b/i,
-      /\blocation\.assign\b/i,
-      /\btop\.location\b/i,
-      /\bparent\.location\b/i,
-      /\bwindow\.location\.href\b/i,
-      /\bdocument\.location\b/i
-    ];
-
-    function isScriptDangerousText(text) {
-      if (!text) return false;
-      return redirectPatterns.some(rx => rx.test(text));
-    }
-
+    const externalScripts = [];
     for (const s of scripts) {
       const src = s.getAttribute('src');
       if (src) {
+        // prevenir cargar HTML como script
         let resolved;
-        try {
-          resolved = new URL(src, baseUrl).href;
-        } catch (e) {
-          resolved = src;
-        }
-
+        try { resolved = new URL(src, baseUrl).href; } catch(e){ resolved = src; }
         if (/\.(html|htm)(?:$|\?)/i.test(resolved)) {
-          console.warn('Se descarta script con src a HTML por seguridad:', resolved);
-          s.remove();
-          continue;
-        }
-        safeExternalScripts.push(resolved);
-        s.remove();
-      } else {
-        const txt = s.textContent || '';
-        if (isScriptDangerousText(txt)) {
-          console.warn('Se descartó un script inline por contener redirecciones potenciales.');
+          console.warn('[respaldo] descartado script-src que apunta a HTML:', resolved);
           s.remove();
         } else {
-          console.warn('Script inline detectado y descartado (ejecución inline deshabilitada).');
+          externalScripts.push(resolved);
           s.remove();
+        }
+      } else {
+        // inline: si parece peligroso se descarta; si no, lo guardamos para ejecutar después
+        const txt = s.textContent || '';
+        if (looksDangerousScriptText = looksDangerousScriptText) {} // placeholder lint
+        if (looksDangerousScriptText(txt)) {
+          console.warn('[respaldo] script inline descartado por patrones peligrosos');
+          s.remove();
+        } else {
+          // conservar el texto para ejecutarlo luego
+          s.dataset.inline = 'true';
+          // lo dejamos en el documento pero lo marcaremos para extraer más tarde
         }
       }
     }
 
-    await Promise.all(loadPromises);
+    // esperar CSS
+    await Promise.all(cssLoadPromises);
 
-    const prevVisibility = contenedor.style.visibility;
+    // ocultar para evitar FOUC
+    const prevVis = contenedor.style.visibility;
     contenedor.style.visibility = 'hidden';
 
+    // insertar HTML limpio
     contenedor.innerHTML = doc.body.innerHTML;
-
     requestAnimationFrame(() => {
-      contenedor.style.visibility = prevVisibility || 'visible';
+      contenedor.style.visibility = prevVis || 'visible';
     });
 
-    for (const srcResolved of safeExternalScripts) {
-      try {
-        if (document.querySelector(`script[src="${srcResolved}"]`)) continue;
+    // ejecutar inline scripts seguros (los que dejaron dataset.inline)
+    try {
+      const inlines = Array.from(contenedor.querySelectorAll('script[data-inline="true"], script'));
+      // Nota: los scripts inline originales fueron removidos del doc; aquí buscamos cualquier <script> que haya quedado por alguna razón.
+      for (const inline of inlines) {
+        const txt = inline.textContent || '';
+        // si es peligroso ya lo hemos descartado antes; como fallback comprobamos otra vez
+        if (looksDangerousScriptText(txt)) {
+          console.warn('[respaldo] evitando ejecucion inline por seguridad');
+          continue;
+        }
+        const newScript = document.createElement('script');
+        newScript.text = txt;
+        document.body.appendChild(newScript);
+        // quitar el script original si existe
+        if (inline.parentNode) inline.parentNode.removeChild(inline);
+      }
+    } catch (e) {
+      console.warn('[respaldo] error ejecutando scripts inline:', e);
+    }
 
-        const srcOrigin = (new URL(srcResolved, location.href)).origin;
-        const pageOrigin = location.origin;
-        if (srcOrigin !== pageOrigin) {
-          console.warn('Omitiendo script cross-origin por seguridad:', srcResolved);
+    // cargar scripts externos (más permisivo: sin HEAD, pero evitamos archivos .html)
+    for (const src of externalScripts) {
+      try {
+        if (document.querySelector(`script[src="${src}"]`)) {
+          console.debug('[respaldo] script externo ya agregado:', src);
           continue;
         }
 
-        try {
-          const headResp = await fetch(srcResolved, { method: 'HEAD' });
-          if (!headResp.ok) {
-            console.warn('HEAD para script no OK, omitiendo:', srcResolved);
-            continue;
-          }
-        } catch (e) {
-          console.warn('HEAD falló para script; omitiendo por seguridad:', srcResolved);
+        // Prevención: si apunta a HTML, saltarlo
+        if (/\.(html|htm)(?:$|\?)/i.test(src)) {
+          console.warn('[respaldo] saltando script externo que apunta a HTML:', src);
           continue;
         }
 
         await new Promise((resolve) => {
-          const scriptEl = document.createElement('script');
-          scriptEl.src = srcResolved;
-          scriptEl.async = false;
-          scriptEl.onload = () => resolve();
-          scriptEl.onerror = () => {
-            console.warn('Error cargando script externo:', srcResolved);
-            resolve();
-          };
-          document.body.appendChild(scriptEl);
+          const sEl = document.createElement('script');
+          sEl.src = src;
+          sEl.async = false;
+          sEl.onload = () => { console.debug('[respaldo] script cargado:', src); resolve(); };
+          sEl.onerror = () => { console.warn('[respaldo] error cargando script:', src); resolve(); };
+          document.body.appendChild(sEl);
         });
       } catch (err) {
-        console.error('Error tratando de cargar script externo:', err);
+        console.warn('[respaldo] excepción cargando script externo:', src, err);
       }
     }
 
-  } catch (error) {
-    console.error('Error cargando componente:', error);
+    console.debug('[respaldo] carga de componente finalizada:', rutaArchivo);
+  } catch (err) {
+    console.error('[respaldo] error cargando componente:', rutaArchivo, err);
+    // fallback: intentar insertar raw HTML para poder ver aunque sea el markup (sin ejecutar scripts)
+    try {
+      console.debug('[respaldo] intentando fallback: insertar HTML bruto (sin procesar scripts).');
+      const { response } = await tryFetchVariants(rutaArchivo);
+      if (response) {
+        const raw = await response.text();
+        // insertar como texto para evitar ejecución involuntaria
+        contenedor.innerHTML = raw;
+      }
+    } catch (e2) {
+      console.error('[respaldo] fallback también falló:', e2);
+    }
   }
 }
 
+// cargar nav y footer (usa rutas relativas)
 async function cargarComponentesBasicos() {
   await Promise.all([
     cargarComponente('contenedor-navegacion', 'Nav_y_footer/navbar.html'),
     cargarComponente('contenedor-pie', 'Nav_y_footer/footer.html')
-  ]).catch(e => console.error('Error cargando componentes basicos:', e));
+  ]).catch(e => console.error('[respaldo] error en cargarComponentesBasicos:', e));
 }
 
 document.addEventListener('DOMContentLoaded', cargarComponentesBasicos);
