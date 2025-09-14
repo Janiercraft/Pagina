@@ -1,17 +1,47 @@
-.forma{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 350px;
-    padding: 20px;
-    border-radius: 20px;
-    position: relative;
-    background-color: #1a1a1a;
-    color: #fff;
-    border: 1px solid #333;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #16384e;
 }
 
-.titulo{
+#contenedor-navegacion,
+#contenedor-pie { width: 100%; }
+
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+  box-sizing: border-box;
+}
+
+.center-wrapper {
+  width: 100%;
+  max-width: 420px;
+}
+
+
+.forma {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.titulo {
     font-size: 28px;
     font-weight: 600;
     letter-spacing: -1px;
@@ -22,18 +52,19 @@
     color: #00bfff;
 }
 
-.titulo::before{
+.titulo::before {
     width: 18px;
     height: 18px;
 }
 
-.titulo::after{
+.titulo::after {
     width: 18px;
     height: 18px;
     animation: pulse 1s linear infinite;
 }
 
-.titulo::before, .titulo::after{
+.titulo::before,
+.titulo::after {
     position: absolute;
     content: "";
     height: 16px;
@@ -43,35 +74,36 @@
     background-color: #00bfff;
 }
 
-.mensaje, .access{
+.mensaje,
+.access {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.7);
 }
 
-.access{
+.access {
     text-align: center;
 }
 
-.access a:hover{
+.access a:hover {
     text-decoration: underline;
 
 }
 
-.access a{
+.access a {
     color: #00bfff;
 }
 
-.flexo{
+.flexo {
     display: flex;
     width: 100%;
     gap: 6px;
 }
 
-.forma label{
+.forma label {
     position: relative;
 }
 
-.forma label .campo{
+.forma label .campo {
     background-color: #333;
     color: #fff;
     width: 100%;
@@ -80,7 +112,7 @@
     border: 1px solid rgba(105, 105, 105, 0.397);
 }
 
-.forma label .campo + span{
+.forma label .campo+span {
     color: rgba(255, 255, 255, 0.5);
     position: absolute;
     left: 10px;
@@ -90,24 +122,24 @@
     transition: 0.3s ease;
 }
 
-.forma label .campo:placeholder-shown + span{
+.forma label .campo:placeholder-shown+span {
     top: 12.5px;
     font-size: 0.9em;
 }
 
-.forma label .campo:focus + span,
-.forma label .campo:valid + span{
+.forma label .campo:focus+span,
+.forma label .campo:valid+span {
     color: #00bfff;
     top: 0px;
     font-size: 0.7em;
     font-weight: 600;
 }
 
-.campo{
+.campo {
     font-size: medium;
 }
 
-.boton{
+.boton {
     border: none;
     outline: none;
     padding: 10px;
@@ -118,17 +150,23 @@
     background-color: #00bfff;
 }
 
-.boton:hover{
+.boton:hover {
     background-color: #96bfff96;
 }
 
-@keyframes pulse{
-    front{
+@keyframes pulse {
+    front {
         transform: scale(0.9);
         opacity: 1;
     }
-    to{
+
+    to {
         transform: scale(1.8);
         opacity: 0;
     }
+}
+
+@media (max-width: 420px) {
+  .center-wrapper { padding: 0 10px; }
+  .main-content { padding: 18px 8px; }
 }

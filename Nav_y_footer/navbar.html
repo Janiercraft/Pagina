@@ -1,21 +1,47 @@
 <link rel="stylesheet" href="navbar.css">
 
-<nav class="Barra_nav">
-    <div class="navbar">
-        <a href="/index.html" class="logo-link">
-            <img src="/Recursos/Logo.png" alt="Logo" class="Logo">
-        </a>
-        <div class="space">
-            <div class="izquierda">
-                <button><a href="/Gráficos/graficos.html" class="Graficos">Graficos</a></button>
-                <button><a href="/Rastreo/rastreo.html" class="Rastreo">Rastreo</a></button>
-                <button><a href="/Mensajeria/mensajeria_beta.html" class="Mensajeria">Mensajeria</a></button>
-            </div>
-            <div class="derecha">
-                <button><a href="/About Us/AboutUs.html" class="AboutUs"> Nuestro Team</a></button>
-                <button><a href="/Login_Signup/Signup.html" class="Signup">Sign up</a></button>
-                <button><a href="/Login_Signup/Login.html" class="Login">Login</a></button>
-            </div>
-        </div>
+<nav class="Barra_nav" role="navigation" aria-label="Main">
+  <div class="navbar">
+    <a href="/index.html" class="logo-link" aria-label="Inicio">
+      <img src="/Recursos/Logo.png" alt="Logo" class="Logo">
+    </a>
+
+    <button class="hamburger" id="navToggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Abrir menú">
+      <span class="hamb-box">
+        <span class="hamb-inner"></span>
+      </span>
+    </button>
+
+    <div class="space">
+      <div class="izquierda">
+        <a href="/Gráficos/graficos.html" class="nav-link">Graficos</a>
+        <a href="/Rastreo/rastreo.html" class="nav-link">Rastreo</a>
+        <a href="/Mensajeria/mensajeria.html" class="nav-link">Mensajeria</a>
+        <a href="/Presupuesto/presupuesto.html" class="nav-link">Presupuesto</a>
+      </div>
+      <div class="derecha">
+        <a href="/About Us/AboutUs.html" class="nav-link">Nuestro Team</a>
+        <a href="/Login_Signup/Signup.html" class="nav-link">Sign up</a>
+        <a href="/Login_Signup/Login.html" class="nav-link nav-login">Login</a>
+      </div>
     </div>
+  </div>
+
+  <div id="mobileMenu" class="mobile-menu" role="menu" aria-hidden="true">
+    <div class="mobile-inner">
+      <a href="/Gráficos/graficos.html" class="mobile-link" role="menuitem">Graficos</a>
+      <a href="/Rastreo/rastreo.html" class="mobile-link" role="menuitem">Rastreo</a>
+      <a href="/Mensajeria/mensajeria.html" class="mobile-link" role="menuitem">Mensajeria</a>
+      <a href="/Presupuesto/presupuesto.html" class="mobile-link" role="menuitem">Presupuesto</a>
+
+      <hr class="mobile-sep">
+
+      <a href="/About Us/AboutUs.html" class="mobile-link" role="menuitem">Nuestro Team</a>
+      <a href="/Login_Signup/Signup.html" class="mobile-link" role="menuitem">Sign up</a>
+      <a href="/Login_Signup/Login.html" class="mobile-link mobile-login" role="menuitem">Login</a>
+    </div>
+  </div>
+
 </nav>
+
+<script src="navbar.js"></script>

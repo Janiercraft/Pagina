@@ -3,29 +3,26 @@
 .Barra_nav {
   background-color: rgba(104,172,223,0.98);
   width: 100%;
-  /* usar una altura fija o auto + padding */
-  height: auto;
-  padding: 0.5rem 1rem; /* control de espacio vertical */
+  padding: 0.5rem 1rem;
+  position: relative;
 }
 
-/* Contenedor principal de la barra */
 .navbar {
-  max-width: 1200px; /* opcional: limita anchura */
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  align-items: center; /* centra verticalmente logo y botones */
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
 }
 
-/* Logo: usar max-height para evitar escalados raros */
 .Logo {
-  height: 48px;     /* tamaño fijo razonable */
+  height: 48px;
   width: auto;
-  max-height: 56px; /* seguridad */
+  max-height: 56px;
+  display: block;
 }
 
-/* Espaciado entre secciones */
 .space {
   display: flex;
   width: 100%;
@@ -33,14 +30,26 @@
   align-items: center;
 }
 
-/* Bloques izquierdo y derecho */
 .izquierda, .derecha {
   display: flex;
   gap: 1.5rem;
   align-items: center;
 }
 
-/* Links */
+.nav-link {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: aliceblue;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+}
+
+.nav-link:hover {
+  background: rgba(126,129,210,0.12);
+}
+
 a {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 1rem;
@@ -49,7 +58,6 @@ a {
   color: aliceblue;
 }
 
-/* Botones: no usar altura en % */
 button {
   background: transparent;
   border: none;
@@ -58,16 +66,117 @@ button {
   cursor: pointer;
 }
 
-/* Hover */
 button:hover {
   transition: all 0.15s ease;
   background: rgba(126,129,210,0.12);
 }
 
-/* Responsivo básico */
 @media (max-width: 700px) {
   .Logo { height: 40px; }
   .izquierda { gap: 0.8rem; }
   .derecha { gap: 0.8rem; }
   .navbar { padding: 0.25rem; }
+}
+
+.hamburger {
+  display: none; /* visible en mobile via media query */
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 105;
+}
+
+.hamb-box {
+  width: 28px;
+  height: 18px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamb-inner,
+.hamb-inner::before,
+.hamb-inner::after {
+  width: 28px;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.hamb-inner { top: 50%; transform: translateY(-50%); }
+.hamb-inner::before { content: ''; top: -8px; }
+.hamb-inner::after  { content: ''; top: 8px; }
+
+.hamburger[aria-expanded="true"] .hamb-inner { transform: rotate(45deg); top: 50%; }
+.hamburger[aria-expanded="true"] .hamb-inner::before { transform: rotate(-45deg) translate(0, 0); top: 50%; opacity: 0; }
+.hamburger[aria-expanded="true"] .hamb-inner::after  { transform: rotate(-45deg); top: 50%; }
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  background: rgba(0,0,0,0.45);
+  z-index: 100;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.mobile-menu .mobile-inner {
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(180deg, #0f172a, #0b1220);
+  color: #fff;
+  height: 100%;
+  padding: 1.25rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+  overflow-y: auto;
+}
+
+.mobile-link {
+  display: block;
+  padding: 14px 12px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.mobile-link:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.mobile-sep {
+  border: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 12px 0;
+}
+
+.mobile-login {
+  margin-top: 8px;
+  background: #fff;
+  color: #0f172a;
+}
+
+.mobile-menu.open { display: block; }
+
+@media (max-width: 700px) {
+  .space { display: none; }
+
+  .hamburger { display: inline-block; }
+
+  .Logo { height: 40px; }
+}
+
+@media (min-width: 701px) {
+  .mobile-menu { display: none !important; }
 }

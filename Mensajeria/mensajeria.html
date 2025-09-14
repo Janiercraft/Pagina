@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoires S.A.S</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mensajeria.css">
+</head>
+<body>
+    <div id="contenedor-navegacion"></div>
+    <div class="chat-container">
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Usuario" class="avatar">
+                <div class="profile-info">
+                    <h2>Centro de Ayuda</h2>
+                    <span class="status">Soporte 24/7 disponible</span>
+                </div>
+            </div>
+            <div class="contacts">
+                <h3>Departamentos</h3>
+                <ul style="list-style: none;">
+                    <li class="contact active" data-department="soporte">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="Soporte" class="avatar">
+                        <div class="contact-info">
+                            <div class="contact-name">Soporte Técnico</div>
+                            <div class="contact-preview">Resolvemos tus dudas técnicas</div>
+                        </div>
+                        <div class="notification-badge">3</div>
+                    </li>
+                    <li class="contact" data-department="comercial">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2922/2922522.png" alt="Comercial" class="avatar">
+                        <div class="contact-info">
+                            <div class="contact-name">Área Comercial</div>
+                            <div class="contact-preview">Información sobre servicios</div>
+                        </div>
+                    </li>
+                    <li class="contact" data-department="logistica">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTb7NdH2ucGC14hY6VaxNzZygw-31dA_As3Q&s" alt="Logística" class="avatar">
+                        <div class="contact-info">
+                            <div class="contact-name">Logística</div>
+                            <div class="contact-preview">Seguimiento de envíos</div>
+                        </div>
+                        <div class="notification-badge">1</div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <main class="chat-main">
+            <header class="chat-header">
+                <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="Soporte" class="avatar" id="headerAvatar">
+                <div class="chat-header-info">
+                    <h3 id="headerTitle">Soporte Técnico</h3>
+                    <div class="typing-indicator" id="typingIndicator">
+                        <span class="loading-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        Escribiendo...
+                    </div>
+                </div>
+            </header>
+            <div class="chat-messages" id="chatMessages">
+                <div class="bot-indicator">
+                    Chatbot de Exoires S.A.S activado - Respuestas automáticas disponibles
+                </div>
+                <div class="message received">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="Soporte" class="message-avatar">
+                    <div class="bubble">
+                        ¡Hola! Bienvenido al centro de ayuda de Exoires S.A.S. ¿En qué podemos ayudarte con tus procesos de importación o exportación?
+                        <span class="time">09:30</span>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <div class="quick-responses" id="quickResponses">
+                    <div class="quick-response" data-response="Necesito información sobre exportación">📦 Exportación</div>
+                    <div class="quick-response" data-response="¿Cuáles son los requisitos de importación?">📋 Requisitos</div>
+                    <div class="quick-response" data-response="Quiero agendar una asesoría">📅 Asesoría</div>
+                    <div class="quick-response" data-response="¿Cuáles son sus tarifas?">💰 Tarifas</div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Escribe tu mensaje aquí..." />
+                    <div class="input-actions">
+                        <button class="action-btn" title="Adjuntar archivo">📎</button>
+                        <button class="action-btn" title="Emoji">😊</button>
+                    </div>
+                    <button class="send-btn" id="sendBtn" title="Enviar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22,2 15,22 11,13 2,9"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="contenedor-pie"></div>
+    <script src="/respaldo.js"></script>
+    <script src="mensajeria.js"></script>
+</body>
+
+</html>

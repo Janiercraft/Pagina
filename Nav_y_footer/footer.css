@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0 40px;
     color: rgb(225, 241, 241);
-    width: 100%; /* Cambiado de a 100% para que ocupe todo el ancho */
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -12,10 +12,10 @@
 
 .principal {
     background: rgba(34, 34, 34, 0.952);
-    padding: 40px 0 20px 0; /* Espaciado estándar arriba y abajo */
+    padding: 40px 0 20px 0;
     margin: 0;
     width: 100%;
-    min-height: 180px; /* Altura mínima estándar */
+    min-height: 180px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -51,7 +51,7 @@
      text-align: left;
         display: flex;
         flex-direction: column;
-        gap: 8px; /* Espacio entre los elementos */
+        gap: 8px;
 }
 
 .page .email,
@@ -60,7 +60,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 8px; /* Espacio entre el icono y el texto */
+    gap: 8px;
 }
 
 
@@ -100,7 +100,7 @@ color: #fcfcfc;
 
 .links a {
     text-decoration: none;
-    color: #fcfcfc; /* Letras blancas */
+    color: #fcfcfc;
     padding: 6px 12px;
     border-radius: 8px;
     transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s;
@@ -109,8 +109,8 @@ color: #fcfcfc;
 }
 
 .links a:hover {
-    background: #b3c6ff; /* Azul pastel */
-    color: #3a5ca8;      /* Azul más intenso */
+    background: #b3c6ff;
+    color: #3a5ca8;     
     box-shadow: 0 2px 8px rgba(179, 198, 255, 0.4);
 
 }
@@ -200,7 +200,3 @@ color: #fcfcfc;
   color: #fff;
 }
 
-.aguapanela{
-  display: flex;
-  justify-content: center;
-}

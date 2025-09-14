@@ -6,82 +6,88 @@
   <title>Exoire S.A.S</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="rastreo.css">
-
 </head>
 
 <body>
-<div id="contenedor-navegacion"></div>
-  <div class="rastreo-layout">
-    <div class="container">
-      <h2>Rastreo de Mercancía</h2>
-      <form id="rastreoForm">
-        <label for="codigo">Ingrese el código de rastreo:</label>
-        <input type="text" id="codigo" name="codigo" required>
-        <button type="submit">Buscar</button>
-      </form>
-      <div id="resultado" class="result" style="display:none;"></div>
+  <div id="contenedor-navegacion"></div>
+
+  <main class="rastreo-layout" role="main">
+    <div class="content-wrapper">
+      <div class="container">
+        <h2>Rastreo de Mercancía</h2>
+        <form id="rastreoForm">
+          <label for="codigo">Ingrese el código de rastreo:</label>
+          <input type="text" id="codigo" name="codigo" required>
+          <button type="submit">Buscar</button>
+        </form>
+        <div id="resultado" class="result" style="display:none;"></div>
+      </div>
+
+      <aside class="stepper-box" aria-label="Estado del envío">
+        <div class="stepper-step stepper-completed">
+          <div class="stepper-circle">
+            <svg viewBox="0 0 16 16" class="bi bi-check-lg" fill="currentColor" height="16" width="16"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.072-2.084l4.111 4.112 6.872-8.735Z">
+              </path>
+            </svg>
+          </div>
+          <div class="stepper-line"></div>
+          <div class="stepper-content">
+            <div class="stepper-title">Order Placed</div>
+            <div class="stepper-status">Completed</div>
+            <div class="stepper-time">May 28, 10:24 AM</div>
+          </div>
+        </div>
+
+        <div class="stepper-step stepper-active">
+          <div class="stepper-circle">2</div>
+          <div class="stepper-line"></div>
+          <div class="stepper-content">
+            <div class="stepper-title">Processing</div>
+            <div class="stepper-status">In Progress</div>
+            <div class="stepper-time">May 29, 02:15 PM</div>
+          </div>
+        </div>
+
+        <div class="stepper-step stepper-pending">
+          <div class="stepper-circle">3</div>
+          <div class="stepper-content">
+            <div class="stepper-title">Shipping</div>
+            <div class="stepper-status">Pending</div>
+            <div class="stepper-time">Estimated: May 30</div>
+          </div>
+        </div>
+
+        <div class="stepper-controls">
+          <button class="stepper-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8">
+              </path>
+            </svg>
+            Previous
+          </button>
+          <button class="stepper-button stepper-button-primary">
+            Next
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8">
+              </path>
+            </svg>
+          </button>
+        </div>
+      </aside>
     </div>
-    <div class="stepper-box">
-      <div class="stepper-step stepper-completed">
-        <div class="stepper-circle">
-          <svg viewBox="0 0 16 16" class="bi bi-check-lg" fill="currentColor" height="16" width="16"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.072-2.084l4.111 4.112 6.872-8.735Z">
-            </path>
-          </svg>
-        </div>
-        <div class="stepper-line"></div>
-        <div class="stepper-content">
-          <div class="stepper-title">Order Placed</div>
-          <div class="stepper-status">Completed</div>
-          <div class="stepper-time">May 28, 10:24 AM</div>
-        </div>
-      </div>
+  </main>
 
-      <div class="stepper-step stepper-active">
-        <div class="stepper-circle">2</div>
-        <div class="stepper-line"></div>
-        <div class="stepper-content">
-          <div class="stepper-title">Processing</div>
-          <div class="stepper-status">In Progress</div>
-          <div class="stepper-time">May 29, 02:15 PM</div>
-        </div>
-      </div>
+  <div id="contenedor-pie"></div>
 
-      <div class="stepper-step stepper-pending">
-        <div class="stepper-circle">3</div>
-        <div class="stepper-content">
-          <div class="stepper-title">Shipping</div>
-          <div class="stepper-status">Pending</div>
-          <div class="stepper-time">Estimated: May 30</div>
-        </div>
-      </div>
-
-      <div class="stepper-controls">
-        <button class="stepper-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8">
-            </path>
-          </svg>
-          Previous
-        </button>
-        <button class="stepper-button stepper-button-primary">
-          Next
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8">
-            </path>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div id="contenedor-pie"></div>
-    <script src="/respaldo.js"></script>
-    <script src="rastreo.js"></script>
+  <script src="/respaldo.js"></script>
+  <script src="rastreo.js"></script>
 </body>
 
 </html>
