@@ -79,7 +79,7 @@ button:hover {
 }
 
 .hamburger {
-  display: none; /* visible en mobile via media query */
+  display: none; 
   background: transparent;
   border: none;
   padding: 8px;

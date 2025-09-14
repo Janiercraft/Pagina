@@ -1,15 +1,15 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-  overflow-x: hidden; /* evita barras horizontales indeseadas */
+  overflow-x: hidden;
 }
 
 .page-main,
 .modal-content,
 .chat-messages,
 .contacts {
-  -ms-overflow-style: none;  /* IE 10+ */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;  
+  scrollbar-width: none;   
 }
 
 .page-main::-webkit-scrollbar,
@@ -40,7 +40,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem; /* separación vertical */
+  padding: 2rem 1rem;
   box-sizing: border-box;
 }
 
@@ -92,8 +92,8 @@ body {
   to { left: calc(var(--width) * -1); }
 }
 
-.slider:hover .item { animation-play-state: paused !important; filter: grayscale(1);}/*si le quieren quitar el efecto de grises al pasar encima de el, quitenle el filter*/
-.slider .item:hover { filter: grayscale(0); } /*y tambien toda esta linea*/
+.slider:hover .item { animation-play-state: paused !important; filter: grayscale(1);} 
+.slider .item:hover { filter: grayscale(0); } 
 
 .slider.paused .item { animation-play-state: paused !important; }
 

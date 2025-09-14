@@ -19,17 +19,17 @@ body {
 
 
 .main-content {
-  flex: 1;                     /* ocupa el espacio disponible */
+  flex: 1;                     
   display: flex;
-  align-items: center;         /* centra verticalmente */
-  justify-content: center;     /* centra horizontalmente */
-  padding: 32px 16px;          /* espacio para la sección sin tocar nav/footer */
+  align-items: center;         
+  justify-content: center;     
+  padding: 32px 16px;          
   box-sizing: border-box;
 }
 
 .center-wrapper {
   width: 100%;
-  max-width: 360px;   /* ajusta según prefieras (300-420px) */
+  max-width: 360px;  
   display: flex;
   justify-content: center;
   align-items: center;

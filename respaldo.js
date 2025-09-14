@@ -1,4 +1,3 @@
-// respaldo.js (versión aún más tolerante y con logging detallado)
 async function tryFetchVariants(ruta) {
   const variants = [ruta, './' + ruta, '/' + ruta];
   for (const v of variants) {
@@ -39,7 +38,6 @@ async function cargarComponente(contenedorId, rutaArchivo) {
   }
 
   try {
-    // intentar fetch con variantes
     const { response, usedPath } = await tryFetchVariants(rutaArchivo);
     if (!response) {
       throw new Error(`No se encontró el archivo en variantes: ${rutaArchivo}`);
@@ -52,14 +50,12 @@ async function cargarComponente(contenedorId, rutaArchivo) {
 
     console.debug(`[respaldo] parsed HTML desde: ${baseUrl}`);
 
-    // quitar potenciales tags peligrosos de head
     doc.querySelectorAll('title, base').forEach(n => n.remove());
     doc.querySelectorAll('meta[http-equiv]').forEach(n => {
       const eq = (n.getAttribute('http-equiv') || '').toLowerCase();
       if (eq === 'refresh') n.remove();
     });
 
-    // resolver src/href/poster relativos -> URLs absolutas respecto al archivo cargado
     (function resolveRelativeAttrs() {
       const attrs = ['src', 'href', 'poster'];
       for (const attr of attrs) {
@@ -78,7 +74,6 @@ async function cargarComponente(contenedorId, rutaArchivo) {
       }
     })();
 
-    // mover hojas de estilo al head y esperar a que carguen
     function isStylesheetLoaded(href) {
       return Array.from(document.styleSheets).some(s => s.href === href);
     }
@@ -111,7 +106,6 @@ async function cargarComponente(contenedorId, rutaArchivo) {
             };
             existing.addEventListener('load', onFinish);
             existing.addEventListener('error', onFinish);
-            // timeout de seguridad
             setTimeout(onFinish, 2500);
           }));
         }
@@ -121,13 +115,11 @@ async function cargarComponente(contenedorId, rutaArchivo) {
       link.remove();
     }
 
-    // extraer scripts (pero no descartamos inline a menos que sean peligrosos)
     const scripts = Array.from(doc.querySelectorAll('script'));
     const externalScripts = [];
     for (const s of scripts) {
       const src = s.getAttribute('src');
       if (src) {
-        // prevenir cargar HTML como script
         let resolved;
         try { resolved = new URL(src, baseUrl).href; } catch(e){ resolved = src; }
         if (/\.(html|htm)(?:$|\?)/i.test(resolved)) {
@@ -138,40 +130,31 @@ async function cargarComponente(contenedorId, rutaArchivo) {
           s.remove();
         }
       } else {
-        // inline: si parece peligroso se descarta; si no, lo guardamos para ejecutar después
         const txt = s.textContent || '';
-        if (looksDangerousScriptText = looksDangerousScriptText) {} // placeholder lint
+        if (looksDangerousScriptText = looksDangerousScriptText) {} 
         if (looksDangerousScriptText(txt)) {
           console.warn('[respaldo] script inline descartado por patrones peligrosos');
           s.remove();
         } else {
-          // conservar el texto para ejecutarlo luego
           s.dataset.inline = 'true';
-          // lo dejamos en el documento pero lo marcaremos para extraer más tarde
         }
       }
     }
 
-    // esperar CSS
     await Promise.all(cssLoadPromises);
 
-    // ocultar para evitar FOUC
     const prevVis = contenedor.style.visibility;
     contenedor.style.visibility = 'hidden';
 
-    // insertar HTML limpio
     contenedor.innerHTML = doc.body.innerHTML;
     requestAnimationFrame(() => {
       contenedor.style.visibility = prevVis || 'visible';
     });
 
-    // ejecutar inline scripts seguros (los que dejaron dataset.inline)
     try {
       const inlines = Array.from(contenedor.querySelectorAll('script[data-inline="true"], script'));
-      // Nota: los scripts inline originales fueron removidos del doc; aquí buscamos cualquier <script> que haya quedado por alguna razón.
       for (const inline of inlines) {
         const txt = inline.textContent || '';
-        // si es peligroso ya lo hemos descartado antes; como fallback comprobamos otra vez
         if (looksDangerousScriptText(txt)) {
           console.warn('[respaldo] evitando ejecucion inline por seguridad');
           continue;
@@ -179,14 +162,12 @@ async function cargarComponente(contenedorId, rutaArchivo) {
         const newScript = document.createElement('script');
         newScript.text = txt;
         document.body.appendChild(newScript);
-        // quitar el script original si existe
         if (inline.parentNode) inline.parentNode.removeChild(inline);
       }
     } catch (e) {
       console.warn('[respaldo] error ejecutando scripts inline:', e);
     }
 
-    // cargar scripts externos (más permisivo: sin HEAD, pero evitamos archivos .html)
     for (const src of externalScripts) {
       try {
         if (document.querySelector(`script[src="${src}"]`)) {
@@ -194,7 +175,6 @@ async function cargarComponente(contenedorId, rutaArchivo) {
           continue;
         }
 
-        // Prevención: si apunta a HTML, saltarlo
         if (/\.(html|htm)(?:$|\?)/i.test(src)) {
           console.warn('[respaldo] saltando script externo que apunta a HTML:', src);
           continue;
@@ -216,13 +196,11 @@ async function cargarComponente(contenedorId, rutaArchivo) {
     console.debug('[respaldo] carga de componente finalizada:', rutaArchivo);
   } catch (err) {
     console.error('[respaldo] error cargando componente:', rutaArchivo, err);
-    // fallback: intentar insertar raw HTML para poder ver aunque sea el markup (sin ejecutar scripts)
     try {
       console.debug('[respaldo] intentando fallback: insertar HTML bruto (sin procesar scripts).');
       const { response } = await tryFetchVariants(rutaArchivo);
       if (response) {
         const raw = await response.text();
-        // insertar como texto para evitar ejecución involuntaria
         contenedor.innerHTML = raw;
       }
     } catch (e2) {
@@ -231,7 +209,6 @@ async function cargarComponente(contenedorId, rutaArchivo) {
   }
 }
 
-// cargar nav y footer (usa rutas relativas)
 async function cargarComponentesBasicos() {
   await Promise.all([
     cargarComponente('contenedor-navegacion', 'Nav_y_footer/navbar.html'),
