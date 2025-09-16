@@ -4,6 +4,41 @@ body {
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     height: 500px;
 }
+.corpo{
+    margin-top: 5%;
+    margin: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size:8rem;
+    color: #0044ff;
+}
+h2{
+    color: #0044ff;
+    margin-top: 2%;
+    font-size:4rem;
+}
+h3{
+    text-shadow: 1px -1px 0 black, 1px -1px 0 black,-1px  1px 0 black, 1px  1px 0 black;
+    margin-left: 20%;
+    margin-right: 20%;
+    color: white;
+    margin-top: 1.5%;
+    font-size:4rem;
+}
+h5{
+    text-shadow: 1px -1px 0 black, 1px -1px 0 black,-1px  1px 0 black, 1px  1px 0 black;
+    margin-top: 2%;
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size:1.8rem;
+    text-align: center;
+    justify-content: center;
+    color: white;
+}
 #bgVideo {
     position: fixed;
     top: 0;
