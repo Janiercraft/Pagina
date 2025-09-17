@@ -21,13 +21,14 @@ h2{
     margin-top: 2%;
     font-size:4rem;
 }
-h3{
+.conectando{
     text-shadow: 1px -1px 0 black, 1px -1px 0 black,-1px  1px 0 black, 1px  1px 0 black;
     margin-left: 20%;
     margin-right: 20%;
     color: white;
     margin-top: 1.5%;
     font-size:4rem;
+    text-align: center;
 }
 h5{
     text-shadow: 1px -1px 0 black, 1px -1px 0 black,-1px  1px 0 black, 1px  1px 0 black;
